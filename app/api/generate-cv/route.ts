@@ -1,10 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { groq } from '@/lib/groq'
+import { createClient } from '@/lib/supabase-server' // server-side auth helper
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
     const { cvData, jobOffer } = body as { cvData: any; jobOffer: string }
+
+    // basic validation
+    if (!cvData || !jobOffer) {
+      return NextResponse.json({ error: 'missing cvData or jobOffer' }, { status: 400 })
+    }
+    const offerTrunc = jobOffer.slice(0, 3000)
 
     const prompt = `IMPORTANT: Generate ALL content in Spanish (Argentina). 
 Use professional Argentine Spanish. Do not use any English words except for technical terms.
@@ -27,7 +34,14 @@ Return ONLY the JSON, no markdown, no explanation.
 
 CV:${JSON.stringify(cvData)}
 
-JobOffer:${jobOffer}`
+JobOffer:${offerTrunc}`
+
+    // authenticate user
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) {
+      return NextResponse.json({ error: 'not authenticated' }, { status: 401 })
+    }
 
     const response = await groq.chat.completions.create({
       model: 'llama-3.3-70b-versatile',
