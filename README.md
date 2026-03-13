@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CVcraft — Generador de CVs con IA
 
-## Getting Started
+## 🚀 Demo
 
-First, run the development server:
+[Live Demo](URL_DEL_DEPLOY) — reemplazá con la URL real después del deploy
+
+## 📌 Descripción
+
+CVcraft es una aplicación que utiliza inteligencia artificial para generar y optimizar tu currículum vitae en base a una oferta laboral. Te ayuda a ahorrar tiempo y a presentar un CV más competitivo, adaptado al puesto al que quieras postular.
+
+## ✨ Features
+
+- Autenticación con Google OAuth (Supabase)
+- Carga de CV existente en PDF con extracción automática de datos por IA
+- Formulario manual para completar información del CV
+- Adaptación del CV a una oferta laboral específica usando IA
+- Cálculo de match score entre el CV y la oferta
+- Vista previa en pantalla del CV generado
+- Descarga del CV optimizado en PDF
+
+## 🛠️ Tech Stack
+
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Supabase (Auth)
+- Groq API (Llama 3.3 70b)
+- unpdf (extracción de texto de PDFs)
+- @react-pdf/renderer (generación de PDFs)
+- shadcn/ui
+
+## ⚙️ Correr localmente
+
+1. Cloná el repositorio:
+
+```bash
+git clone https://github.com/JulianGuzmanDev/cvcraft.git
+cd cvcraft
+```
+
+2. Instalá dependencias:
+
+```bash
+npm install
+```
+
+3. Configurá las variables de entorno (ver sección siguiente).
+4. Ejecutá el servidor en modo desarrollo:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Abrí http://localhost:3000 en el navegador y logueate con Google.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🗄️ Variables de entorno
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable                        | Descripción                                 |
+| ------------------------------- | ------------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`      | URL de tu proyecto Supabase                 |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Clave anónima de Supabase                   |
+| `GROQ_API_KEY`                  | API key para el modelo Groq (Llama 3.3 70b) |
 
-## Learn More
+## 📐 Decisiones técnicas
 
-To learn more about Next.js, take a look at the following resources:
+- **Groq vs OpenAI:** usamos Groq porque ofrece tier gratuito, buena velocidad y se integra fácil con el flujo de Groq Chat.
+- **Sin almacenamiento de CVs:** para maximizar la privacidad y simplificar la arquitectura, todos los CV se generan y sirven en memoria; no se guardan en la base de datos.
+- **unpdf en server-side:** elegimos unpdf para parsear PDFs del lado del servidor ya que permite extraer texto sin necesidad de dependencias complicadas y funciona bien con los formatos de CV comunes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔮 Próximas features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Múltiples templates de diseño para el PDF
+- Historial de CVs generados
+- Sugerencias de mejora del CV
 
-## Deploy on Vercel
+## ⚠️ Limitaciones conocidas
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- El nombre del usuario puede no extraerse correctamente de PDFs con formato especial
