@@ -2,7 +2,7 @@
 
 ## 🚀 Demo
 
-[Live Demo](URL_DEL_DEPLOY) — reemplazá con la URL real después del deploy
+[Live Demo](https://cvcraft-seven.vercel.app)
 
 ## 📌 Descripción
 
