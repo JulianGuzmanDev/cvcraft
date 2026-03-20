@@ -67,6 +67,11 @@ npm run dev
 - **Sin almacenamiento de CVs:** para maximizar la privacidad y simplificar la arquitectura, todos los CV se generan y sirven en memoria; no se guardan en la base de datos.
 - **unpdf en server-side:** elegimos unpdf para parsear PDFs del lado del servidor ya que permite extraer texto sin necesidad de dependencias complicadas y funciona bien con los formatos de CV comunes.
 
+  ## 📸 Screenshots
+
+![Screenshot](nombre-de-tu-archivo.png)
+![Screenshot 2](nombre-de-tu-archivo-2.png)
+
 ## 🔮 Próximas features
 
 - Múltiples templates de diseño para el PDF
