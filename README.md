@@ -6,8 +6,8 @@
 
 ## 📸 Screenshots
 
-![Screenshot](Captura de pantalla 2026-03-19 221759.png)
-![Screenshot 2](Captura de pantalla 2026-03-19 221834.png)
+![CVcraft](cvcraft-1.png)
+![CVcraft](cvcraft-2.png))
 
 ## 📌 Descripción
 
